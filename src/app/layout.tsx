@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${robotoFlex.variable} antialiased`}>
         {/* <Navbar /> */}
-        <div className="font-black-slanted">Black Slanted Text</div>
+
         <main>{children}</main>
         {/* <Footer /> */}
       </body>
