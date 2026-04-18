@@ -5,7 +5,7 @@ import { Bounded } from "./Bounded";
 
 export function Footer() {
   return (
-    <Bounded as="footer" className="bg-black text-gray-400">
+    <Bounded as="footer" className="border-t border-white/10 bg-black text-zinc-400">
       <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
         <div className="flex flex-col items-center md:items-start">
           <Link href="/" className="shrink-0">
@@ -36,7 +36,7 @@ function FooterLink({ href, children }: FooterLinkProps) {
   return (
     <Link
       href={href}
-      className="text-sm transition-colors hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+      className="text-sm transition-colors hover:text-red-400 focus:ring-2 focus:ring-red-700 focus:ring-offset-2 focus:ring-offset-black focus:outline-none"
     >
       {children}
     </Link>

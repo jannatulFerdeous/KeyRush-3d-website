@@ -74,11 +74,11 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         ".hero-scene",
         {
           background:
-            "linear-gradient(to bottom, #000000, #0f172a, #062f4a, #7fa0b9)",
+            "radial-gradient(circle at top, rgba(220, 38, 38, 0.3), transparent 38%), linear-gradient(to bottom, #050505, #120708, #24090c, #470d13)",
         },
         {
           background:
-            "linear-gradient(to bottom, #ffffff, #ffffff, #ffffff, #ffffff)",
+            "linear-gradient(to bottom, #09090b, #111113, #17171b, #1f1f23)",
           scrollTrigger: {
             trigger: ".hero",
             start: "top top",
@@ -140,7 +140,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
               }}
             />
           </div>
-          <button className="font-bold-slanted group flex w-fit cursor-pointer items-center gap-1 rounded bg-[#01A7E1] px-3 py-1 text-2xl uppercase transition disabled:grayscale">
+          <button className="font-bold-slanted group flex w-fit cursor-pointer items-center gap-1 rounded border border-red-400/30 bg-linear-to-r from-red-700 to-red-900 px-3 py-1 text-2xl uppercase shadow-lg shadow-red-950/40 transition hover:from-red-600 hover:to-red-800 disabled:grayscale">
             {slice.primary.buy_button_text}
             <span className="transition group-hover:translate-x-1">{">"}</span>
           </button>

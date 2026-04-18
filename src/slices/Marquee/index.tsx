@@ -14,10 +14,10 @@ export type MarqueeProps = SliceComponentProps<Content.MarqueeSlice>;
  */
 const Marquee: FC<MarqueeProps> = ({ slice }) => {
   const MarqueeContent = () => (
-    <div className="flex items-center bg-gray-200 py-10 whitespace-nowrap">
+    <div className="flex items-center border-y border-white/10 bg-zinc-950 py-10 whitespace-nowrap">
       {slice.primary.phrases.map((item, i) => (
         <Fragment key={i}>
-          <div className="font-bold-slanted px-14 text-[180px] leading-none text-gray-400/80 uppercase [text-box:trim-both_cap_alphabetic] md:text-[260px]">
+          <div className="font-bold-slanted px-14 text-[180px] leading-none text-red-950 uppercase [text-box:trim-both_cap_alphabetic] md:text-[260px]">
             {item.text}
           </div>
           <LogoMark className="size-36 flex-shrink-0" />

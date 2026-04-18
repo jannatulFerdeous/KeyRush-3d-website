@@ -45,7 +45,7 @@ export function Navbar() {
           ref={button}
           onClick={handleCheckout}
           className={clsx(
-            "group relative flex h-12 transform-gpu cursor-pointer items-center justify-center overflow-hidden rounded bg-gradient-to-r from-[#01A7E1] to-[#0196C9] px-6 py-2.5 font-semibold text-white will-change-transform hover:shadow-lg hover:shadow-[#01A7E1]/25 focus:ring-2 focus:ring-[#01A7E1] focus:ring-offset-2 focus:outline-none disabled:grayscale motion-safe:transition-all motion-safe:duration-300 md:text-base",
+            "group relative flex h-12 transform-gpu cursor-pointer items-center justify-center overflow-hidden rounded border border-red-400/20 bg-gradient-to-r from-red-700 to-red-900 px-6 py-2.5 font-semibold text-white will-change-transform hover:shadow-lg hover:shadow-red-950/40 focus:ring-2 focus:ring-red-700 focus:ring-offset-2 focus:ring-offset-zinc-950 focus:outline-none disabled:grayscale motion-safe:transition-all motion-safe:duration-300 md:text-base",
             "before:absolute before:inset-0 before:translate-x-[-100%] before:bg-gradient-to-r before:from-white/0 before:via-white/20 before:to-white/0 before:ease-out hover:before:translate-x-[100%] motion-safe:before:transition-transform motion-safe:before:duration-700",
           )}
         >
@@ -55,16 +55,16 @@ export function Navbar() {
           </span>
         </button>
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger className="flex size-12 cursor-pointer items-center justify-center rounded bg-gray-300 hover:bg-gray-300/80 hover:shadow-lg hover:shadow-black/10 motion-safe:transition">
+          <DialogTrigger className="flex size-12 cursor-pointer items-center justify-center rounded border border-white/10 bg-zinc-900/90 text-zinc-100 hover:bg-zinc-800 hover:shadow-lg hover:shadow-black/30 motion-safe:transition">
             <LuMenu className="size-5" />
             <span className="sr-only">Toggle menu</span>
           </DialogTrigger>
           <DialogPortal>
             <DialogOverlay className="motion-safe:data-[state=open]:animate-in motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:fade-out-0 motion-safe:data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50" />
-            <DialogContent className="motion-safe:data-[state=open]:animate-in motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:slide-out-to-right motion-safe:data-[state=open]:slide-in-from-right fixed inset-y-0 right-0 z-50 h-full w-3/4 bg-white p-4 shadow-lg ease-in-out motion-safe:transition motion-safe:data-[state=closed]:duration-300 motion-safe:data-[state=open]:duration-500 sm:max-w-sm">
+            <DialogContent className="motion-safe:data-[state=open]:animate-in motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:slide-out-to-right motion-safe:data-[state=open]:slide-in-from-right fixed inset-y-0 right-0 z-50 h-full w-3/4 border-l border-white/10 bg-zinc-950 p-4 text-zinc-100 shadow-lg shadow-black/50 ease-in-out motion-safe:transition motion-safe:data-[state=closed]:duration-300 motion-safe:data-[state=open]:duration-500 sm:max-w-sm">
               <DialogTitle className="sr-only" />
               <DialogDescription className="sr-only" />
-              <DialogClose className="ml-auto flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full text-gray-400 hover:text-black motion-safe:transition">
+              <DialogClose className="ml-auto flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full text-zinc-500 hover:bg-zinc-900 hover:text-white motion-safe:transition">
                 <LuX className="size-5" />
                 <span className="sr-only">Close menu</span>
               </DialogClose>
@@ -116,15 +116,15 @@ function NavbarLink({ href, title, description }: NavbarLinkProps) {
       <Link
         href={href}
         onClick={() => setOpen(false)}
-        className="group flex items-center rounded-xl p-4 hover:bg-[#01A7E1]/10 motion-safe:transition"
+        className="group flex items-center rounded-xl p-4 hover:bg-red-950/60 motion-safe:transition"
       >
         <div className="flex grow flex-col gap-1">
-          <span className="text-xl font-semibold text-gray-900 group-hover:text-[#01A7E1] motion-safe:transition">
+          <span className="text-xl font-semibold text-zinc-100 group-hover:text-red-400 motion-safe:transition">
             {title}
           </span>
-          <span className="text-sm text-gray-500">{description}</span>
+          <span className="text-sm text-zinc-400">{description}</span>
         </div>
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-400 group-hover:bg-[#01A7E1] group-hover:text-white motion-safe:transition">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-zinc-900 text-zinc-500 group-hover:bg-red-700 group-hover:text-white motion-safe:transition">
           <LuChevronRight className="size-5 translate-x-px" />
         </div>
       </Link>
