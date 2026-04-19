@@ -333,7 +333,7 @@ export const Keyboard = forwardRef<KeyboardRefs, KeyboardProps>(
     const keycapMat = keycapMaterial || defaultKeycapMat;
 
     const knobMat = new THREE.MeshStandardMaterial({
-      color: knobColor || "#E24818",
+      color: knobColor || "#B7001A",
       roughness: 0.4,
       metalness: 1,
       bumpMap: knurlTexture,
@@ -346,17 +346,17 @@ export const Keyboard = forwardRef<KeyboardRefs, KeyboardProps>(
     });
 
     const bottomCaseMat = new THREE.MeshStandardMaterial({
-      color: "#1E548A",
+      color: "#000000",
       roughness: 0.4,
     });
 
     const topCaseMat = new THREE.MeshStandardMaterial({
-      color: "#dddddd",
+      color: "#B7001A",
       roughness: 0.7,
     });
 
     const feetMat = new THREE.MeshStandardMaterial({
-      color: "#333333",
+      color: "#0000",
       roughness: 0.6,
     });
 
@@ -367,6 +367,7 @@ export const Keyboard = forwardRef<KeyboardRefs, KeyboardProps>(
 
     const switchMat = new THREE.MeshStandardMaterial({
       color: "#cccccc",
+      // KEYBOARD E SWITCH ER COLOR
       roughness: 0.4,
     });
 
