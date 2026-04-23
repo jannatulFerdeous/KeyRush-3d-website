@@ -29,7 +29,7 @@
     transform: translateX(-50%);
   }
 }
-
+/* animation */
 .animate-marquee {
   animation-name: marquee;
   animation-duration: 30s;
