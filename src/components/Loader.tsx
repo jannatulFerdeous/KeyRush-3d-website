@@ -8,7 +8,7 @@ gsap.registerPlugin(useGSAP);
 
 export function Loader() {
   const containerRef = useRef<HTMLDivElement>(null);
-  // the grid box
+
   useGSAP(
     () => {
       const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
