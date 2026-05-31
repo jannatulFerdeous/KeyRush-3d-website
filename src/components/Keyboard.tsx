@@ -351,7 +351,7 @@ export const Keyboard = forwardRef<KeyboardRefs, KeyboardProps>(
     });
 
     const topCaseMat = new THREE.MeshStandardMaterial({
-      color: "#B7001A",
+      color: "#ffff",
       roughness: 0.7,
     });
 

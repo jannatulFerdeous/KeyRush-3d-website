@@ -130,7 +130,7 @@ const PurchaseButton: FC<PurchaseButtonProps> = ({ slice }) => {
                   Loading...
                 </span>
               ) : (
-                slice.primary.button_text
+                "Buy Now"
               )}
             </span>
 

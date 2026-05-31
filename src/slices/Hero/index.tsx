@@ -141,7 +141,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             />
           </div>
           <button className="font-bold-slanted group flex w-fit cursor-pointer items-center gap-1 rounded border border-red-400/30 bg-linear-to-r from-red-700 to-red-900 px-3 py-1 text-2xl uppercase shadow-lg shadow-red-950/40 transition hover:from-red-600 hover:to-red-800 disabled:grayscale">
-            {slice.primary.buy_button_text}
+            {/* {slice.primary.buy_button_text} */} Buy Now
             <span className="transition group-hover:translate-x-1">{">"}</span>
           </button>
         </Bounded>
