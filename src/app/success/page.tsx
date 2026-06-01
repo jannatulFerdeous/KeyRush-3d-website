@@ -12,10 +12,19 @@ import Stripe from "stripe";
 
 import { Logo } from "@/components/Logo";
 import { FadeIn } from "@/components/FadeIn";
+import { getProductByUid } from "@/products";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-07-30.basil",
-});
+function getStripeClient() {
+  const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+
+  if (!stripeSecretKey) {
+    throw new Error("Missing STRIPE_SECRET_KEY environment variable");
+  }
+
+  return new Stripe(stripeSecretKey, {
+    apiVersion: "2025-07-30.basil",
+  });
+}
 
 export const metadata: Metadata = {
   title: "Order Confirmation | Nimbus Keyboards",
@@ -64,7 +73,9 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
   // Fetch session details from Stripe
   try {
+    const stripe = getStripeClient();
     const session = await stripe.checkout.sessions.retrieve(sessionId);
+    const product = getProductByUid("vapor75");
 
     const orderDetails = {
       sessionId: session.id,
@@ -72,6 +83,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
       amount: session.amount_total
         ? (session.amount_total / 100).toFixed(2)
         : "",
+      productName: product?.name ?? "Keyboard",
     };
 
     return (
@@ -127,7 +139,9 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
               <div className="flex items-center justify-between border-b border-white/10 py-3">
                 <span className="text-zinc-400">Product:</span>
-                <span className="text-zinc-100">Vapor75 Keyboard</span>
+                <span className="text-zinc-100">
+                  {orderDetails.productName}
+                </span>
               </div>
 
               {orderDetails.amount && (

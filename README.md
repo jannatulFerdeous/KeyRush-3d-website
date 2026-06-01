@@ -14,6 +14,10 @@ pnpm dev
 bun dev
 ```
 
+To enable keyboard purchases, copy `.env.example` to `.env.local` and set
+`STRIPE_SECRET_KEY` to your Stripe secret key. The Buy buttons create a Stripe
+Checkout session for the local `vapor75` product configured in `src/products.ts`.
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.

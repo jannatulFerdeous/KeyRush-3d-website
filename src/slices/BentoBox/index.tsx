@@ -1,14 +1,10 @@
 "use client";
 
 import { FC, useRef } from "react";
-import { asText, Content } from "@prismicio/client";
-import {
-  PrismicRichText,
-  PrismicText,
-  SliceComponentProps,
-} from "@prismicio/react";
+import { Content } from "@prismicio/client";
+import { SliceComponentProps } from "@prismicio/react";
+import Image from "next/image";
 import { Bounded } from "@/components/Bounded";
-import { PrismicNextImage } from "@prismicio/next";
 import { FadeIn } from "@/components/FadeIn";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -20,6 +16,38 @@ gsap.registerPlugin(useGSAP, Draggable, ScrollTrigger);
 export type BentoBoxProps = SliceComponentProps<Content.BentoBoxSlice>;
 
 const CARD_SPACING = 0.16;
+const BENTO_SLIDER_ITEMS = [
+  {
+    size: "Switch",
+    text: "Hot-swap ready controls built for quick tuning and crisp feedback.",
+    image: "/keycap_uv-1.png",
+  },
+  {
+    size: "Profile",
+    text: "Sculpted caps keep long sessions comfortable without losing speed.",
+    image: "/keycap_uv-2.png",
+  },
+  {
+    size: "RGB",
+    text: "Layered lighting adds depth while keeping every key easy to read.",
+    image: "/keycap_uv-3.png",
+  },
+  {
+    size: "Frame",
+    text: "A compact chassis gives the board a solid, desk-ready presence.",
+    image: "/keycap_uv-4.png",
+  },
+  {
+    size: "Sound",
+    text: "Dampened internals create a clean tone with less hollow resonance.",
+    image: "/keycap_uv-5.png",
+  },
+  {
+    size: "Layout",
+    text: "Flexible everyday controls stay close without crowding your setup.",
+    image: "/keycap_uv-6.png",
+  },
+];
 
 const BentoBox: FC<BentoBoxProps> = ({ slice }) => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -294,7 +322,7 @@ const BentoBox: FC<BentoBoxProps> = ({ slice }) => {
               id="features"
               className="font-bold-slanted max-w-4xl scroll-pt-6 text-5xl tracking-tight uppercase md:text-8xl"
             >
-              <PrismicText field={slice.primary.heading} />
+              Keyboard Features
             </h2>
 
             <p className="max-w-md text-sm tracking-[0.24em] text-white/55 uppercase">
@@ -345,23 +373,25 @@ const BentoBox: FC<BentoBoxProps> = ({ slice }) => {
             <div className="relative flex-1">
               <ul
                 ref={cardsFrameRef}
-                className="absolute top-1/2 left-1/2 h-[24rem] w-[16rem] -translate-x-1/2 -translate-y-1/2 md:h-[30rem] md:w-[20rem]"
+                className="absolute top-1/2 left-1/2 h-[24rem] w-[18rem] -translate-x-1/2 -translate-y-1/2 md:h-[30rem] md:w-[23rem]"
               >
-                {slice.primary.items.map((item, index) => (
+                {BENTO_SLIDER_ITEMS.map((item, index) => (
                   <li
-                    key={`${asText(item.text)}-${index}`}
+                    key={`${item.size}-${index}`}
                     ref={(element) => {
                       if (element) {
                         cardRefs.current[index] = element;
                       }
                     }}
-                    className="bento-slider-card absolute top-0 left-0 h-[24rem] w-[16rem] list-none overflow-hidden rounded-[1.6rem] border border-white/15 bg-[#121214] shadow-[0_24px_60px_rgba(0,0,0,0.45)] md:h-[30rem] md:w-[20rem]"
+                    className="bento-slider-card absolute top-0 left-0 h-[24rem] w-[18rem] list-none overflow-hidden rounded-[1.6rem] border border-white/15 bg-[#121214] shadow-[0_24px_60px_rgba(0,0,0,0.45)] md:h-[30rem] md:w-[23rem]"
                   >
-                    <PrismicNextImage
-                      field={item.image}
+                    <Image
+                      src={item.image}
+                      alt=""
                       className="bento-slider-image h-full w-full object-cover"
                       quality={96}
                       width={900}
+                      height={1200}
                     />
 
                     <div className="bento-slider-glow pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_15%,rgba(255,255,255,0.26),transparent_32%),linear-gradient(to_top,rgba(0,0,0,0.88),rgba(0,0,0,0.16)_55%,rgba(0,0,0,0.04))]" />
@@ -376,7 +406,7 @@ const BentoBox: FC<BentoBoxProps> = ({ slice }) => {
                       </div>
 
                       <div className="text-base leading-relaxed text-pretty text-white md:text-lg">
-                        <PrismicRichText field={item.text} />
+                        <p>{item.text}</p>
                       </div>
                     </div>
                   </li>
@@ -427,7 +457,7 @@ function buildSeamlessLoop(
     paused: true,
     repeat: -1,
     onRepeat() {
-      const timeline = this as gsap.core.Timeline & {
+      const timeline = this as unknown as gsap.core.Timeline & {
         _dur: number;
         _tTime: number;
         _time: number;

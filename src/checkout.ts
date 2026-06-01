@@ -1,9 +1,12 @@
-export async function checkout() {
-  try {
-    const res = await fetch("/api/checkout/vapor75", { method: "POST" });
-    const data = await res.json();
-    window.location.href = data.url;
-  } catch (error) {
-    console.error("Purchase Failed:", error);
+export async function checkout(uid = "vapor75") {
+  const response = await fetch(`/api/checkout/${uid}`, { method: "POST" });
+  const data = (await response.json()) as { url?: string; error?: string };
+
+  if (!response.ok || !data.url) {
+    const message = data.error ?? "Failed to create checkout session";
+    window.alert(message);
+    throw new Error(message);
   }
+
+  window.location.href = data.url;
 }

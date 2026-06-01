@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, createContext, useContext } from "react";
+import { useState, createContext, useContext } from "react";
 import Link from "next/link";
 import { LuChevronRight, LuMenu, LuX } from "react-icons/lu";
 import {
@@ -15,22 +15,14 @@ import {
 } from "@radix-ui/react-dialog";
 import { Logo } from "./Logo";
 import clsx from "clsx";
-import { checkout } from "@/checkout";
 
 const DialogContext = createContext<
   [open: boolean, setOpen: (open: boolean) => void]
 >([false, () => {}]);
 
 export function Navbar() {
-  const button = useRef<HTMLButtonElement>(null);
   const state = useState(false);
   const [open, setOpen] = state;
-
-  async function handleCheckout() {
-    if (button.current) button.current.disabled = true;
-    await checkout();
-    if (button.current) button.current.disabled = false;
-  }
 
   return (
     <header className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between p-3 md:p-6">
@@ -41,9 +33,8 @@ export function Navbar() {
         <Logo className="h-6 w-auto md:h-8" />
       </Link>
       <div className="flex gap-3 md:gap-4">
-        <button
-          ref={button}
-          onClick={handleCheckout}
+        <Link
+          href="/products/vapor75"
           className={clsx(
             "group relative flex h-12 transform-gpu cursor-pointer items-center justify-center overflow-hidden rounded border border-red-400/20 bg-gradient-to-r from-red-700 to-red-900 px-6 py-2.5 font-semibold text-white will-change-transform hover:shadow-lg hover:shadow-red-950/40 focus:ring-2 focus:ring-red-700 focus:ring-offset-2 focus:ring-offset-zinc-950 focus:outline-none disabled:grayscale motion-safe:transition-all motion-safe:duration-300 md:text-base",
             "before:absolute before:inset-0 before:translate-x-[-100%] before:bg-gradient-to-r before:from-white/0 before:via-white/20 before:to-white/0 before:ease-out hover:before:translate-x-[100%] motion-safe:before:transition-transform motion-safe:before:duration-700",
@@ -53,7 +44,7 @@ export function Navbar() {
             Buy
             <LuChevronRight className="size-5 group-hover:translate-x-0.5 motion-safe:transition-transform motion-safe:duration-200" />
           </span>
-        </button>
+        </Link>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger className="flex size-12 cursor-pointer items-center justify-center rounded border border-white/10 bg-zinc-900/90 text-zinc-100 hover:bg-zinc-800 hover:shadow-lg hover:shadow-black/30 motion-safe:transition">
             <LuMenu className="size-5" />
@@ -72,24 +63,24 @@ export function Navbar() {
                 <nav>
                   <ul>
                     <NavbarLink
-                      href="#features"
+                      href="/#features"
                       title="Features"
                       description="Learn more about our features"
                     />
                     <NavbarLink
-                      href="#switch-playground"
+                      href="/#switch-playground"
                       title="Switch Playground"
                       description="Choose your perfect switch"
                     />
                     <NavbarLink
-                      href="#keycap-changer"
+                      href="/#keycap-changer"
                       title="Keycaps"
                       description="Choose your perfect keycap set"
                     />
                     <NavbarLink
-                      href="#buy-button"
+                      href="/products/vapor75"
                       title="Purchase"
-                      description="Order your Vapor75 now!"
+                      description="View details and order your Vapor75"
                     />
                   </ul>
                 </nav>

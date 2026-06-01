@@ -1,6 +1,7 @@
 "use client";
 
-import { FC, useRef, useState } from "react";
+import { FC, useRef } from "react";
+import Link from "next/link";
 import { Content } from "@prismicio/client";
 import {
   PrismicRichText,
@@ -10,10 +11,9 @@ import {
 import { Bounded } from "@/components/Bounded";
 import { FadeIn } from "@/components/FadeIn";
 import clsx from "clsx";
-import { LuChevronRight, LuLoader } from "react-icons/lu";
+import { LuChevronRight } from "react-icons/lu";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { checkout } from "@/checkout";
 
 gsap.registerPlugin(useGSAP);
 
@@ -27,15 +27,8 @@ export type PurchaseButtonProps =
  * Component for "PurchaseButton" Slices.
  */
 const PurchaseButton: FC<PurchaseButtonProps> = ({ slice }) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLAnchorElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
-  const [isPressed, setIsPressed] = useState(false);
-
-  const handlePurchaseClick = async () => {
-    setIsPressed(true);
-    await checkout();
-    setIsPressed(false);
-  };
 
   useGSAP(() => {
     if (!buttonRef.current || !textRef.current) return;
@@ -103,17 +96,14 @@ const PurchaseButton: FC<PurchaseButtonProps> = ({ slice }) => {
           <PrismicText field={slice.primary.heading} />
         </h2>
 
-        <button
+        <Link
+          href="/products/vapor75"
           ref={buttonRef}
-          onClick={handlePurchaseClick}
-          disabled={isPressed}
           className={clsx(
             "group relative w-full overflow-hidden rounded-full border-8 border-zinc-950 bg-linear-to-r from-red-700 via-red-600 to-red-900 px-8 py-6 ease-out focus:ring-[24px] focus:ring-red-800/40 focus:outline-none motion-safe:transition-all motion-safe:duration-300 md:border-[12px] md:px-20 md:py-16",
             "hover:scale-105 hover:shadow-2xl hover:shadow-red-950/40",
             "active:scale-95",
-            isPressed
-              ? "scale-95 cursor-not-allowed opacity-80"
-              : "cursor-pointer",
+            "block cursor-pointer",
           )}
         >
           <div className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/40 to-transparent ease-out group-hover:translate-x-full motion-safe:transition-transform motion-safe:duration-1000" />
@@ -124,23 +114,14 @@ const PurchaseButton: FC<PurchaseButtonProps> = ({ slice }) => {
               style={{ "--wdth": 85, "--wght": 850 } as React.CSSProperties}
               className="font-black-slanted text-4xl tracking-wide text-white uppercase group-hover:-translate-y-1 motion-safe:transition-transform motion-safe:duration-300 md:text-7xl lg:text-9xl"
             >
-              {isPressed ? (
-                <span className="flex items-center gap-4 md:gap-6">
-                  <LuLoader className="size-12 animate-spin text-white md:size-16" />
-                  Loading...
-                </span>
-              ) : (
-                "Buy Now"
-              )}
+              Buy Now
             </span>
 
-            {!isPressed && (
-              <div className="hidden group-hover:translate-x-2 group-hover:scale-125 motion-safe:transition-all motion-safe:duration-300 md:block">
-                <LuChevronRight className="size-12 text-white md:size-16" />
-              </div>
-            )}
+            <div className="hidden group-hover:translate-x-2 group-hover:scale-125 motion-safe:transition-all motion-safe:duration-300 md:block">
+              <LuChevronRight className="size-12 text-white md:size-16" />
+            </div>
           </div>
-        </button>
+        </Link>
 
         <div className="mt-12 space-y-3 text-base text-zinc-400 md:text-lg">
           <PrismicRichText field={slice.primary.body} />
